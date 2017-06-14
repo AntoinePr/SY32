@@ -61,6 +61,8 @@ def random_rect(sizeX, sizeY):
 #rect = random_rect(415, 751)
 #show_inner_img(apprFiles[79], rect[0], rect[1], rect[2], rect[3])
 
+# Return an array of different random rectangles for
+# a given picture format
 def pict_neg_samples_generation(sizeX, sizeY):
     init_nb_of_samples = 50
     neg_samples = np.zeros((init_nb_of_samples, 4), dtype=np.int)
