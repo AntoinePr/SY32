@@ -6,6 +6,8 @@ Created on Wed Jun 14 20:03:04 2017
 @author: AntoineP
 """
 
+#TO DO: Add photo size into the arg of reshape_rect
+
 # Reshape the rectangle so that 2*width = hight
 def reshape_rect(posX, posY, width, hight):
     if(2*width > hight):
