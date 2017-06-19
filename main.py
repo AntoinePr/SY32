@@ -19,18 +19,16 @@ from skimage.io import imread, imshow
 from skimage.util import img_as_float
 
 from neg_generation import *
-from preformating import *
+from preformating import uniformize_label_sizes
 from tool_func import *
 
 apprFiles = glob.glob("projetpers/train/*")
 label = np.loadtxt("projetpers/label.txt", dtype=np.int)
+label = np.delete(label, 0, 1)
 
+label = uniformize_label_sizes(label, apprFiles)
 
-
-
-
-
-
+samp_matrix, samp_vector  = generate_all_neg(label, apprFiles)
 
 
 

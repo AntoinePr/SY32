@@ -12,3 +12,5 @@ def show_inner_img(path, posX, posY, width, hight):
     image = imread(path)
     image = image[posY:(posY+hight), posX:(posX+width)]
     imshow(image)
+    
+# show_inner_img(apprFiles[188], 207, 5, 258, 378)
