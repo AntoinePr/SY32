@@ -171,6 +171,8 @@ def generate_all_neg(label, apprFiles):
             new_row = from_rect_to_vector(image, neg_samp[j,])
             samp_matrix = np.vstack([samp_matrix, new_row])
             samp_vector.append(0)
+    
+    samp_vector = np.array(samp_vector)
 
     return samp_matrix, samp_vector 
 
