@@ -10,6 +10,15 @@ Created on Wed Jun 14 16:50:49 2017
 fonction pour diminuer la taille d'un image ?
 """
 
+"""
+Rapport pour dimanche 25/06
+10 points rapports
+5 points code
+5 points résultats
+
+Résultats peuvent être envoyés le dimanche 02/07
+"""
+
 import glob
 import random
 import numpy as np
