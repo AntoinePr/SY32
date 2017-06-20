@@ -19,7 +19,7 @@ from skimage.transform import rescale
 # bigger than 'ok_ratio'
 def same_rect(rec1, rec2):
     # rec: posX, posY, width, hight
-    ok_ratio = 0.7
+    ok_ratio = 0.5
     topLeftX = max(rec1[0], rec2[0])
     topLeftY = max(rec1[1], rec2[1])
     botRightX = min(rec1[0]+rec1[2], rec2[0]+rec2[2])
