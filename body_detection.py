@@ -42,4 +42,4 @@ def analyse(posX, posY, image, clf):
     pred = clf.predict(imageAff)
     if pred == 1:
         print("PosX={}  ;  PosY={}".format(posX, posY))
-        imshow(image[posY:(posY+128), posX:(posX+64)])
+        print("Score = {}".format(clf.decision_function(imageAff)))
