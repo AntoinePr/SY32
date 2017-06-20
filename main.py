@@ -27,6 +27,7 @@ import numpy as np
 from skimage.io import imread, imshow
 from skimage.util import img_as_float
 
+from learning import *
 from neg_generation import *
 from preformating import uniformize_label_sizes
 from tool_func import *
