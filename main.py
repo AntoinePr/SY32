@@ -58,14 +58,16 @@ r, C = optimisation_SVM(samp_matrix, samp_vector, 5, lst)
 clf = svm.SVC(kernel='linear', C=0.01)
 clf.fit(samp_matrix, samp_vector)
 
-tmpTest = apprFilesTest[1:2]
+tmpTest = apprFilesTest[5:6]
 detection(tmpTest, clf)
 
+show_inner_img(tmpTest[0], 0, 0, 2000, 2000)
 
-show_inner_img(tmpTest[0], 410, 560, 64*2, 128*2)
+show_inner_img(tmpTest[0], 440, 420, 64*2, 128*2)
 
-show_inner_img(tmpTest[0], 410, 660, 64*3, 128*3)
+show_inner_img(tmpTest[0], 450, 460, 64*3, 128*3)
 
+show_inner_img(tmpTest[0], 450, 460, 64*4, 128*5)
 
 
 

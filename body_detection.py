@@ -24,10 +24,10 @@ def detection(apprFilesTest, clf):
         image = rgb2gray(img_as_float(imread(apprFilesTest[k])))
         sizeX = image.shape[1]
         sizeY = image.shape[0]
-        maxScaling = min(int(sizeX/64), int(sizeY/128)) - 2
+        maxScaling = min(int(sizeX/64), int(sizeY/128)) - 1
         maxScaling = max(maxScaling, 3)
         for scale in range(2, maxScaling):
-            print("     Scale {}".format(scale))
+            print("  Scale {}".format(scale))
             img = image
             rescale(img, 1/scale, mode='reflect')
             stepX = 10
@@ -39,7 +39,7 @@ def detection(apprFilesTest, clf):
 def analyse(posX, posY, image, clf):
     imageAff = image[posY:(posY+128), posX:(posX+64)]
     imageAff = imageAff.reshape(1, 64*128)
-    pred = clf.predict(imageAff)
-    if pred == 1:
-        print("PosX={}  ;  PosY={}".format(posX, posY))
-        print("Score = {}".format(clf.decision_function(imageAff)))
+    score = clf.decision_function(imageAff)
+    if score > 0.1:
+        print("      PosX={}  ;  PosY={}".format(posX, posY))
+        print("      Score = {}".format(clf.decision_function(imageAff)))
