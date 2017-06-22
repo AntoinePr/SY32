@@ -14,26 +14,7 @@ from skimage.color import rgb2gray
 from skimage.io import imread
 from skimage.transform import rescale
 
-
-# Returns true if two rectangles have an intersection
-# bigger than 'ok_ratio'
-def same_rect(rec1, rec2):
-    # rec: posX, posY, width, hight
-    ok_ratio = 0.5
-    topLeftX = max(rec1[0], rec2[0])
-    topLeftY = max(rec1[1], rec2[1])
-    botRightX = min(rec1[0]+rec1[2], rec2[0]+rec2[2])
-    botRightY = min(rec1[1]+rec1[3], rec2[1]+rec2[3])
-    
-    interWidth = max(botRightX-topLeftX, 0)
-    interHight = max(botRightY-topLeftY, 0)
-    interSize = interWidth*interHight
-    
-    if (interSize/(rec1[2]*rec1[3]) > ok_ratio
-        or interSize/(rec2[2]*rec2[3]) > ok_ratio):
-        return True
-    
-    return False
+from tool_func import same_rect
     
 # Returns a random rectangle of the right format
 # makes sure it fits into the photo

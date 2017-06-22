@@ -42,32 +42,43 @@ label = uniformize_label_sizes(label, apprFiles)
 
 samp_matrix, samp_vector  = generate_all_neg(label, apprFiles)
 
-"""
-clf = svm.SVC(kernel='linear')
-lst = [0.001, 0.01, 0.1, 1, 10]
-r, C = optimisation_SVM(samp_matrix, samp_vector, 5, lst)
-# r = 0.104; C = 0.01
-lst = [0.001, 0.005, 0.01, 0.05, 0.1]
-r, C = optimisation_SVM(samp_matrix, samp_vector, 5, lst)
-# r = 0.104; C = 0.01
-lst = [0.006, 0.008, 0.01, 0.02, 0.04]
-r, C = optimisation_SVM(samp_matrix, samp_vector, 5, lst)
-# r = 0.104; C = 0.01
-"""
-
 clf = svm.SVC(kernel='linear', C=0.01)
 clf.fit(samp_matrix, samp_vector)
 
-tmpTest = apprFilesTest[5:6]
-detection(tmpTest, clf)
+# validation_croisee(samp_matrix, samp_vector, 5, clf)
+
+clf = learn_false_pos(apprFiles, label, clf, samp_matrix, samp_vector)
+
+# validation_croisee(samp_matrix, samp_vector, 5, clf)
+
+tmpTest = apprFilesTest[0:3]
+pos_rects, pos_vectors = detection(tmpTest, clf)
+
+false_pos, z_false_pos = find_false_pos(label, pos_rects, pos_vectors)
 
 show_inner_img(tmpTest[0], 0, 0, 2000, 2000)
-
 show_inner_img(tmpTest[0], 440, 420, 64*2, 128*2)
 
-show_inner_img(tmpTest[0], 450, 460, 64*3, 128*3)
 
-show_inner_img(tmpTest[0], 450, 460, 64*4, 128*5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
