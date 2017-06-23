@@ -45,13 +45,13 @@ samp_matrix, samp_vector  = generate_all_neg(label, apprFiles)
 clf = svm.SVC(kernel='linear', C=0.01)
 clf.fit(samp_matrix, samp_vector)
 
-# validation_croisee(samp_matrix, samp_vector, 5, clf)
+validation_croisee(samp_matrix, samp_vector, 5, clf)
 
 clf = learn_false_pos(apprFiles, label, clf, samp_matrix, samp_vector)
 
-# validation_croisee(samp_matrix, samp_vector, 5, clf)
+validation_croisee(samp_matrix, samp_vector, 5, clf)
 
-tmpTest = apprFilesTest[0:3]
+tmpTest = apprFilesTest[0:10]
 pos_rects, pos_vectors = detection(tmpTest, clf)
 
 false_pos, z_false_pos = find_false_pos(label, pos_rects, pos_vectors)

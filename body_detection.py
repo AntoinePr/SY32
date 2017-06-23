@@ -7,14 +7,18 @@ Created on Tue Jun 20 14:08:41 2017
 """
 import numpy as np
 
+from PIL.Image import *
+
 from skimage.io import imread
+from skimage.io import imshow
 from skimage.util import img_as_float
 from skimage.transform import rescale
 from skimage.color import rgb2gray
 
+
 from tool_func import same_rect
 
-MIN_SCORE  = 0.5
+MIN_SCORE  = 0.5 
 
 # Analyse all pictures and returns a list
 # of the coordinates of the detected bodies
@@ -41,7 +45,7 @@ def analyse_sub_pict(pict_nb , pict_path, clf):
     sizeX = image.shape[1]
     sizeY = image.shape[0]
     # Calculation of maxScaling
-    maxScaling = min(int(sizeX/64), int(sizeY/128)) - 1
+    maxScaling = min(int(sizeX/64), int(sizeY/128))
     maxScaling = max(maxScaling, 3)
     # Instanciation of arrays
     pos_rects = np.zeros(5)
@@ -50,8 +54,7 @@ def analyse_sub_pict(pict_nb , pict_path, clf):
     # Finding of positive rects per scale
     for scale in range(2, maxScaling):
         nb_pos = 0
-        img = image
-        rescale(img, 1/scale, mode='reflect')
+        img = rescale(image, 1/scale, mode='reflect')
         stepX = 10
         stepY = 20
         # Translation over the X axis
@@ -61,6 +64,7 @@ def analyse_sub_pict(pict_nb , pict_path, clf):
                 score, vector = is_a_body(posX, posY, img, clf)
                 # Add of positive rectangle
                 if score > MIN_SCORE:
+                    imshow(img[posY:(posY+128), posX:(posX+64)])
                     nb_pos += 1
                     new_rect = np.array([ 
                             posX*scale,
