@@ -7,10 +7,7 @@ Created on Tue Jun 20 14:08:41 2017
 """
 import numpy as np
 
-from PIL.Image import *
-
 from skimage.io import imread
-from skimage.io import imshow
 from skimage.util import img_as_float
 from skimage.transform import rescale
 from skimage.color import rgb2gray
@@ -64,7 +61,6 @@ def analyse_sub_pict(pict_nb , pict_path, clf):
                 score, vector = is_a_body(posX, posY, img, clf)
                 # Add of positive rectangle
                 if score > MIN_SCORE:
-                    imshow(img[posY:(posY+128), posX:(posX+64)])
                     nb_pos += 1
                     new_rect = np.array([ 
                             posX*scale,

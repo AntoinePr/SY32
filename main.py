@@ -42,28 +42,22 @@ label = uniformize_label_sizes(label, apprFiles)
 
 samp_matrix, samp_vector  = generate_all_neg(label, apprFiles)
 
-clf = svm.SVC(kernel='linear', C=0.01)
+clf = svm.SVC(kernel='linear', C=0.01, class_weight={0:0.1, 1:0.9})
 clf.fit(samp_matrix, samp_vector)
+err_rates = []
+err_rates += validation_croisee(samp_matrix, samp_vector, 5, clf)
 
-validation_croisee(samp_matrix, samp_vector, 5, clf)
+clf, errs = learn_false_pos(apprFiles, label, clf, samp_matrix, samp_vector)
+err_rates  += errs
+    
 
-clf = learn_false_pos(apprFiles, label, clf, samp_matrix, samp_vector)
+pos_rects, pos_vectors = detection(apprFilesTest, clf)
 
-validation_croisee(samp_matrix, samp_vector, 5, clf)
+rects = pos_rects
+rects[:, 0].astype('int')
 
-tmpTest = apprFilesTest[0:10]
-pos_rects, pos_vectors = detection(tmpTest, clf)
-
-false_pos, z_false_pos = find_false_pos(label, pos_rects, pos_vectors)
-
-show_inner_img(tmpTest[0], 0, 0, 2000, 2000)
-show_inner_img(tmpTest[0], 440, 420, 64*2, 128*2)
-
-
-
-
-
-
+fmt='%03d %d %d %d %d %f'
+np.savetxt('result.txt', rects, fmt=fmt)
 
 
 

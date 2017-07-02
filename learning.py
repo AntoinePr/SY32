@@ -91,6 +91,7 @@ def find_false_pos(label, pos_rects, pos_vectors):
 
 # Add some false pos to the learning data and relearn the classifier
 def learn_false_pos(apprFiles, label, clf, samp_matrix, samp_vector):
+    err_rates = []
     for phase in range(1):
         print("==================================================")
         print("LEARNING FALSE POSITIVE, PHASE {}".format(phase+1))
@@ -99,8 +100,9 @@ def learn_false_pos(apprFiles, label, clf, samp_matrix, samp_vector):
         false_pos, z_false_pos = find_false_pos(label, pos_rects, pos_vectors)
         samp_matrix = np.vstack([samp_matrix, false_pos])
         samp_vector = np.append(samp_vector, z_false_pos)
+        err_rates.append(validation_croisee(samp_matrix, samp_vector, 5, clf))
         clf.fit(samp_matrix, samp_vector)
-    return clf
+    return clf, err_rates
     
     
 
